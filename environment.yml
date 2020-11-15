@@ -1,0 +1,12 @@
+name: sygyt-env
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - matplotlib
+  - jupyter
+  - ipywidgets
+  - IPython
+  - librosa
