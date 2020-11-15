@@ -73,7 +73,7 @@ def display_spectrogram(Zxx, sr):
     plt.tight_layout()
     plt.show()
 
-def compute_cqt(samples, sr):
+def compute_warped_cqt(samples, sr):
     n_bins = NUM_KEYS*BINS_PER_NOTE
     bins_per_octave = 12*BINS_PER_NOTE
     Cxx = librosa.cqt(samples, sr=sr, n_bins=n_bins, bins_per_octave=bins_per_octave, fmin=FMIN)
@@ -81,7 +81,7 @@ def compute_cqt(samples, sr):
 
 def display_cqt(Sxx, sr):
     librosa.display.specshow(Sxx, sr=sr, x_axis='time', y_axis='off')
-    plt.title('Log spectrogram')
+    plt.title('CQT spectrogram')
     plt.colorbar(format='%+2.0f dB')
     plt.tight_layout()
     plt.show()
@@ -122,16 +122,16 @@ def run_instruments_harmonic_demo():
     return demo
 
 def run_live_spectrogram_demo():
-    return IFrame('https://borismus.github.io/spectrogram/', width=1000, height=700)
+    return IFrame('https://borismus.github.io/spectrogram/', width=700, height=700, frameborder="0", allow="microphone")
 
 def run_play_fantasia():
     return Audio(FANTASIA_PATH)
 
-def run_show_fantasia_cqt():
+def run_show_fantasia_warped_cqt():
     y, sr = wav_read(FANTASIA_PATH)
-    t_cutoff = 2*sr # first 2 seconds
+    t_cutoff = 5*sr # first 2 seconds
     y_short = y[:t_cutoff]
-    Zxx = compute_cqt(y_short, sr)
+    Zxx = compute_warped_cqt(y_short, sr)
     display_cqt(Zxx, sr)
 
 def run_note_detection_demo():

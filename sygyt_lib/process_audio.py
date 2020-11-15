@@ -281,7 +281,7 @@ def decode_song(x, sr, detect_ends=True, draw=False):
         i = onset_frames[n] + onset_forward_shift
         i = note_detect_frames[n]
         i = min(i, Sxx.shape[1] - 1)
-        bins, notes, freqs, volumes = get_note_bins_at_index(Sxx, fs, i, omit_notes=omit_notes, peak_note=False, draw=False, polyphonic=False)
+        bins, notes, freqs, volumes = get_note_bins_at_index(Sxx, fs, i, omit_notes=omit_notes, peak_note=False, draw=False)
         omit_notes = notes
         
         # if last note has NOT ended next note has to be of different frequency
